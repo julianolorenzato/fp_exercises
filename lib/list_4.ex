@@ -1,4 +1,4 @@
-defmodule FpExercises do
+defmodule List4 do
   def double_list([]), do: []
   def double_list([head | tail]) do
     [head * 2 | double_list(tail)]
@@ -35,7 +35,7 @@ defmodule FpExercises do
   end
 end
 
-defmodule FpExercisesWithAbstractions do
+defmodule List4WithAbstractions do
   def double_list(list) do
     Enum.map(list, fn x -> x * 2 end)
   end
