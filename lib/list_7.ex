@@ -46,11 +46,42 @@ defmodule List7 do
 
   def zero_sales_thin(n), do: find_week(n, 0)
 
-  # clauses with guards vs cond
-  # def greater_sale_2(m, n, biggest \\ 0)
-  # def greater_sale_2(m, n, biggest) when m == n, do: biggest
-  # def greater_sale_2(m, n, biggest) when n > m do
-  #   curr = List6.sales(n)
-  #   greater_sale_2(m, n - 1, maxi(curr, biggest))
-  # end
+  # clauses with guards vs cond?
+  def greater_sale_2(m, n, biggest \\ 0)
+  def greater_sale_2(m, n, biggest) do
+    curr = List6.sales(n)
+    if m == n do
+      maxi(curr, biggest)
+    else
+      greater_sale_2(m, n - 1, maxi(curr, biggest))
+    end
+  end
+
+  def zero_sales_2(m, n) when m == n do
+    if List6.sales(n) == 0, do: n, else: -1
+  end
+  def zero_sales_2(m, n) when m < n do
+    if List6.sales(n) == 0, do: n, else: zero_sales_2(m, n - 1)
+  end
+
+  def find_week_2(m, n, s) when m == n do
+    if List6.sales(n) == s, do: n, else: -1
+  end
+  def find_week_2(m, n, s) when m < n do
+    if List6.sales(n) == s, do: n, else: find_week_2(m, n - 1, s)
+  end
+
+  def factorial(0), do: 1
+  def factorial(n), do: factorial(n - 1) * n
+
+  def product(m, n) when m == n, do: m
+  def product(m, n) when m < n, do: product(m + 1, n) * m
+
+  def fib(n, counter \\ 0, curr \\ 0, next \\ 1)
+  def fib(n, counter, curr, next) do
+    case n do
+      ^counter -> curr
+      _ -> fib(n, counter + 1, next, next + curr)
+    end
+  end
 end
